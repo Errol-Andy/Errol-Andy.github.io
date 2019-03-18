@@ -79,17 +79,27 @@
 
 
 
-<meta name="description" content="Blog">
+<meta name="description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
 <meta name="keywords" content="python, paper, deep learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Gold Experience">
-<meta property="og:url" content="http://errol-andy.github.io/categories/paper/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Adaptive Image Clustering (DAC)">
+<meta property="og:url" content="http://errol-andy.github.io/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/index.html">
 <meta property="og:site_name" content="Gold Experience">
-<meta property="og:description" content="Blog">
+<meta property="og:description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907410576.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907434367.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907469086.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907290263.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907261955.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907335522.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907369362.png">
+<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907154870.png">
+<meta property="og:updated_time" content="2019-03-18T11:50:00.589Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gold Experience">
-<meta name="twitter:description" content="Blog">
+<meta name="twitter:title" content="Deep Adaptive Image Clustering (DAC)">
+<meta name="twitter:description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
+<meta name="twitter:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907410576.png">
 
 
 
@@ -119,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://errol-andy.github.io/categories/paper/">
+  <link rel="canonical" href="http://errol-andy.github.io/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/">
 
 
 
 
 
-  <title>Category: paper | Gold Experience</title>
+  <title>Deep Adaptive Image Clustering (DAC) | Gold Experience</title>
   
 
 
@@ -144,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -278,53 +288,165 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>paper<small>Category</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/03/12/first-page/" itemprop="url">
-              
-                <span itemprop="name">first page</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Deep Adaptive Image Clustering (DAC)</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-12T21:42:07+08:00" content="2019-03-12">
-          03-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:49:23+08:00">
+                2019-03-18
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
+<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
+<p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
+<p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
+<p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
+<p>参数更新：固定w，更新阈值函数的参数</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
+<p>算法流程：</p>
+<ol>
+<li>随机初始化网络参数</li>
+<li>采样batch，m个样本</li>
+<li>根据余弦距离选择置信度高的样本，打上类标</li>
+<li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
+<li>最小化损失函数，更新网络参数</li>
+<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
+<li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
+</ol>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
+<p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/Deep Adaptive Image Clustering/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -332,6 +454,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -352,8 +478,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -413,6 +548,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Adaptive-Image-Clustering-DAC"><span class="nav-number">1.</span> <span class="nav-text">Deep Adaptive Image Clustering (DAC)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -553,6 +704,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

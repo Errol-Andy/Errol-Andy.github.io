@@ -293,6 +293,294 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/" itemprop="url">Deep Adaptive Image Clustering (DAC)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:49:23+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
+<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
+<p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
+<p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
+<p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
+<p>参数更新：固定w，更新阈值函数的参数</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
+<p>算法流程：</p>
+<ol>
+<li>随机初始化网络参数</li>
+<li>采样batch，m个样本</li>
+<li>根据余弦距离选择置信度高的样本，打上类标</li>
+<li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
+<li>最小化损失函数，更新网络参数</li>
+<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
+<li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
+</ol>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
+<p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep Adaptive Image Clustering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/18/Deep Adaptive Image Clustering/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:04:36+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
+<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
+<p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
+<p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
+<p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
+<p>参数更新：固定w，更新阈值函数的参数</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
+<p>算法流程：</p>
+<ol>
+<li>随机初始化网络参数</li>
+<li>采样batch，m个样本</li>
+<li>根据余弦距离选择置信度高的样本，打上类标</li>
+<li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
+<li>最小化损失函数，更新网络参数</li>
+<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
+<li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
+</ol>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
+<p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/12/first-page/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -606,7 +894,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
