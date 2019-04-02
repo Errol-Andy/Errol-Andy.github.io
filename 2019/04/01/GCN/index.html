@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="default">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="code,VAE,node,link,semi,unsupervised,">
 
 
 
@@ -79,27 +79,21 @@
 
 
 
-<meta name="description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
-<meta name="keywords" content="python, paper, deep learning">
+<meta name="description" content="GCNSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKSICLR 2017https://github.com/tkipf/gcn代码版本：tf，keras，torch 定义Laplace：$L = I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{T}$ ，U为L的特征向量">
+<meta name="keywords" content="code,VAE,node,link,semi,unsupervised">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gold Experience">
-<meta property="og:url" content="http://errol-andy.github.io/2019/03/18/Deep Adaptive Image Clustering/index.html">
+<meta property="og:title" content="GCN">
+<meta property="og:url" content="http://errol-andy.github.io/2019/04/01/GCN/index.html">
 <meta property="og:site_name" content="Gold Experience">
-<meta property="og:description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
+<meta property="og:description" content="GCNSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKSICLR 2017https://github.com/tkipf/gcn代码版本：tf，keras，torch 定义Laplace：$L = I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{T}$ ，U为L的特征向量">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907410576.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907434367.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907469086.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907290263.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907261955.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907335522.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907369362.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907154870.png">
-<meta property="og:updated_time" content="2019-03-18T11:48:57.018Z">
+<meta property="og:image" content="http://errol-andy.github.io/2019/04/01/img/1554128137628.png">
+<meta property="og:image" content="http://errol-andy.github.io/2019/04/01/img/1554128161010.png">
+<meta property="og:updated_time" content="2019-04-01T14:41:49.709Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Gold Experience">
-<meta name="twitter:description" content="Deep Adaptive Image Clustering (DAC)背景：结合表示学习和聚类。用二分类问题框架来聚类、 方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。  损失函数：真实类标是否同类 vs 网络学得余弦距离  余弦距离：网络学得样本的类标特征(label feature)，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。  真实样">
-<meta name="twitter:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/1552907410576.png">
+<meta name="twitter:title" content="GCN">
+<meta name="twitter:description" content="GCNSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKSICLR 2017https://github.com/tkipf/gcn代码版本：tf，keras，torch 定义Laplace：$L = I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{T}$ ，U为L的特征向量">
+<meta name="twitter:image" content="http://errol-andy.github.io/2019/04/01/img/1554128137628.png">
 
 
 
@@ -129,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://errol-andy.github.io/2019/03/18/Deep Adaptive Image Clustering/">
+  <link rel="canonical" href="http://errol-andy.github.io/2019/04/01/GCN/">
 
 
 
 
 
-  <title> | Gold Experience</title>
+  <title>GCN | Gold Experience</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -154,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -302,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep Adaptive Image Clustering/">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/04/01/GCN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Koyomi">
@@ -319,7 +313,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">GCN</h1>
         
 
         <div class="post-meta">
@@ -331,8 +325,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:04:36+08:00">
-                2019-03-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T22:13:24+08:00">
+                2019-04-01
               </time>
             
 
@@ -341,6 +335,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Graph</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -369,32 +385,53 @@
       
 
       
-        <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
-<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
-<p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
-<p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
-<p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
-<p>参数更新：固定w，更新阈值函数的参数</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
-<p>算法流程：</p>
+        <h2 id="GCN"><a href="#GCN" class="headerlink" title="GCN"></a>GCN</h2><p>SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS<br>ICLR 2017<br><a href="https://github.com/tkipf/gcn" target="_blank" rel="noopener">https://github.com/tkipf/gcn</a><br>代码版本：tf，keras，torch</p>
+<p>定义Laplace：$L = I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{T}$ ，U为L的特征向量<br>定义Kernel：$g<em>{\theta}(\Lambda)$<br>定义卷积公式 $g</em>{\theta}*x$：$y = g<em>{\theta}(L)x=g</em>{\theta}(U\Lambda U^{T})x$ </p>
+<p>选择不同卷积核，卷积公式不同：</p>
 <ol>
-<li>随机初始化网络参数</li>
-<li>采样batch，m个样本</li>
-<li>根据余弦距离选择置信度高的样本，打上类标</li>
-<li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
-<li>最小化损失函数，更新网络参数</li>
-<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
-<li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
+<li><p>$g<em>{\theta}(\Lambda)=diag(\theta)$<br>$y = g</em>{\theta}(U\Lambda U^{T})x=Ug_{\theta}(\Lambda)U^{T}x$ </p>
+</li>
+<li><p>$g<em>{\theta}(\Lambda)=\sum</em>{k}^{K}{\theta<em>k}\Lambda^k$ ，由于$(U\Lambda U^{T})^k=U\Lambda^k U^{T}$<br>$y=\sum</em>{k}^{K}{\theta<em>kU\Lambda^k U^{T}x}=\sum</em>{k}^{K}{\theta_k L^k x}$ </p>
+</li>
+<li><p>$g<em>{\theta}(\Lambda)=\sum</em>{k}^{K}{\theta_k}T_k(\tilde{\Lambda})$ </p>
+<p>$y=\sum_{k}^{K}{\theta_k T_k(\tilde{L})x}$ </p>
+</li>
 </ol>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
-<p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
-
+<p>其中$\tilde{\Lambda}=\frac{2}{\lambda<em>{max}}\Lambda-I_N,\tilde{L}=\frac{2}{\lambda</em>{max}}L-I<em>N$<br>由Chebyshev polynomials： $T_0(x)=1, T_1(x)=x, T_k(x)=2xT</em>{k-1}(x)-T_{k-2}(x)$ </p>
+<p>令 $\lambda_{max}=2, K=1$ 则 $ y=\theta_0 x+\theta_1 T_1(\tilde{L})x$ ，卷积公式推导如下：</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+y &=& \theta_0 x+\theta_1 T_1(\tilde{L})x \\
+&=& \theta_0 x+\theta_1 \tilde{L}x \\
+&=& \theta_0 x+\theta_1 (L-I_N)x \\
+&=& \theta_0 x-\theta_1 D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x \\
+&=& \theta (I+D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x, 其中\theta_0=-\theta_1 \\
+&=& \theta \tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}x, 其中\tilde{A}=A+I_N \\
+&=& \theta Lx, 由变形得到
+\end{eqnarray}</script><p>故每层GCN更新公式为：$H^{(l+1)}=\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})​$</p>
+<h2 id="GCN和Fourier的关系"><a href="#GCN和Fourier的关系" class="headerlink" title="GCN和Fourier的关系"></a>GCN和Fourier的关系</h2><p>如何理解 Graph Convolutional Network（GCN）？ - superbrother的回答 - 知乎<br><a href="https://www.zhihu.com/question/54504471/answer/332657604" target="_blank" rel="noopener">https://www.zhihu.com/question/54504471/answer/332657604</a></p>
+<h2 id="Semi-Supervised"><a href="#Semi-Supervised" class="headerlink" title="Semi-Supervised"></a>Semi-Supervised</h2><p>$\hat{A}=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$<br>$Z=f(X,A)=softmax(\hat{A}ReLU(\hat{A}XW_0)W_1)​$<br>损失为labeled节点和预测类标的交叉熵</p>
+<p><img src="../img/1554128137628.png" alt="1554128137628"></p>
+<p><img src="../img/1554128161010.png" alt="1554128161010"></p>
+<h2 id="GCN-VAE"><a href="#GCN-VAE" class="headerlink" title="GCN+VAE"></a>GCN+VAE</h2><p>Variational Graph Auto-Encoders<br>tf代码 <a href="https://github.com/tkipf/gae" target="_blank" rel="noopener">https://github.com/tkipf/gae</a><br>VAE <a href="https://zhuanlan.zhihu.com/p/34998569" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34998569</a></p>
+<p>网路构造如下，学习新的邻接矩阵，可用于Link Prediction</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+h &=& ReLU(AXW_1) \\
+\mu &=& AXW_2 \\
+\log\sigma &=& AXW_2 \\
+z &=& \mu+\varepsilon\sigma \\
+\hat{A} &=& preds \\
+&=& \sigma(zz^T)=zz^T \\
+A &=& labels \\
+\end{eqnarray}</script><p>损失函数=重构损失-KL散度<br>重构损失：希望重构的邻接矩阵尽量接近原矩阵<br>KL散度：注意本文式子 -KL 才是散度，代表分布和标准正态分布的相似性，我们希望散度小，即希望-KL小。<br>两种损失互相对抗，一种希望尽量拟合，一种希望模型尽量简单，接近假设分布。</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+&& norm = \frac{n^2}{n^2-\sum_{i,j}^{N,N}{a_{ij}}} \\
+&& L_{re} = norm*mean(softmax(preds,labels)) \\
+&& KL = \frac{1}{n}mean(\frac{1}{2}\sum_{a}^{b}{(1+2\log \sigma-\mu^2-\sigma^2)}) \\
+&& L = L_{re}-KL = E[\log p(A|Z)]-KL[q(Z|X,A)||p(Z)]
+\end{eqnarray}</script>
       
     </div>
     
@@ -409,6 +446,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/code/" rel="tag"># code</a>
+          
+            <a href="/tags/VAE/" rel="tag"># VAE</a>
+          
+            <a href="/tags/node/" rel="tag"># node</a>
+          
+            <a href="/tags/link/" rel="tag"># link</a>
+          
+            <a href="/tags/semi/" rel="tag"># semi</a>
+          
+            <a href="/tags/unsupervised/" rel="tag"># unsupervised</a>
+          
+        </div>
+      
 
       
       
@@ -418,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/12/first-page/" rel="next" title="first page">
-                <i class="fa fa-chevron-left"></i> first page
+              <a href="/2019/04/01/Adaptive-Graph-Convolutional-Neural-Networks/" rel="next" title="Adaptive Graph Convolutional Neural Networks">
+                <i class="fa fa-chevron-left"></i> Adaptive Graph Convolutional Neural Networks
               </a>
             
           </div>
@@ -427,10 +480,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/" rel="prev" title="Deep Adaptive Image Clustering (DAC)">
-                Deep Adaptive Image Clustering (DAC) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -507,7 +556,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -518,7 +567,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -529,7 +578,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -562,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Adaptive-Image-Clustering-DAC"><span class="nav-number">1.</span> <span class="nav-text">Deep Adaptive Image Clustering (DAC)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GCN"><span class="nav-number">1.</span> <span class="nav-text">GCN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCN和Fourier的关系"><span class="nav-number">2.</span> <span class="nav-text">GCN和Fourier的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semi-Supervised"><span class="nav-number">3.</span> <span class="nav-text">Semi-Supervised</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCN-VAE"><span class="nav-number">4.</span> <span class="nav-text">GCN+VAE</span></a></li></ol></div>
             
 
           </div>
@@ -769,6 +818,45 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
 
   
 

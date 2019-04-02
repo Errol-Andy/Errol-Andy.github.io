@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="default">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -125,7 +125,7 @@
 
 
 
-  <title>Gold Experience</title>
+  <title>Gold Experience</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -293,6 +293,654 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/04/01/GCN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/01/GCN/" itemprop="url">GCN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T22:13:24+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Graph</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="GCN"><a href="#GCN" class="headerlink" title="GCN"></a>GCN</h2><p>SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS<br>ICLR 2017<br><a href="https://github.com/tkipf/gcn" target="_blank" rel="noopener">https://github.com/tkipf/gcn</a><br>代码版本：tf，keras，torch</p>
+<p>定义Laplace：$L = I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}=U\Lambda U^{T}$ ，U为L的特征向量<br>定义Kernel：$g<em>{\theta}(\Lambda)$<br>定义卷积公式 $g</em>{\theta}*x$：$y = g<em>{\theta}(L)x=g</em>{\theta}(U\Lambda U^{T})x$ </p>
+<p>选择不同卷积核，卷积公式不同：</p>
+<ol>
+<li><p>$g<em>{\theta}(\Lambda)=diag(\theta)$<br>$y = g</em>{\theta}(U\Lambda U^{T})x=Ug_{\theta}(\Lambda)U^{T}x$ </p>
+</li>
+<li><p>$g<em>{\theta}(\Lambda)=\sum</em>{k}^{K}{\theta<em>k}\Lambda^k$ ，由于$(U\Lambda U^{T})^k=U\Lambda^k U^{T}$<br>$y=\sum</em>{k}^{K}{\theta<em>kU\Lambda^k U^{T}x}=\sum</em>{k}^{K}{\theta_k L^k x}$ </p>
+</li>
+<li><p>$g<em>{\theta}(\Lambda)=\sum</em>{k}^{K}{\theta_k}T_k(\tilde{\Lambda})$ </p>
+<p>$y=\sum_{k}^{K}{\theta_k T_k(\tilde{L})x}$ </p>
+</li>
+</ol>
+<p>其中$\tilde{\Lambda}=\frac{2}{\lambda<em>{max}}\Lambda-I_N,\tilde{L}=\frac{2}{\lambda</em>{max}}L-I<em>N$<br>由Chebyshev polynomials： $T_0(x)=1, T_1(x)=x, T_k(x)=2xT</em>{k-1}(x)-T_{k-2}(x)$ </p>
+<p>令 $\lambda_{max}=2, K=1$ 则 $ y=\theta_0 x+\theta_1 T_1(\tilde{L})x$ ，卷积公式推导如下：</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+y &=& \theta_0 x+\theta_1 T_1(\tilde{L})x \\
+&=& \theta_0 x+\theta_1 \tilde{L}x \\
+&=& \theta_0 x+\theta_1 (L-I_N)x \\
+&=& \theta_0 x-\theta_1 D^{-\frac{1}{2}}AD^{-\frac{1}{2}}x \\
+&=& \theta (I+D^{-\frac{1}{2}}AD^{-\frac{1}{2}})x, 其中\theta_0=-\theta_1 \\
+&=& \theta \tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}x, 其中\tilde{A}=A+I_N \\
+&=& \theta Lx, 由变形得到
+\end{eqnarray}</script><p>故每层GCN更新公式为：$H^{(l+1)}=\sigma(\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}H^{(l)}W^{(l)})​$</p>
+<h2 id="GCN和Fourier的关系"><a href="#GCN和Fourier的关系" class="headerlink" title="GCN和Fourier的关系"></a>GCN和Fourier的关系</h2><p>如何理解 Graph Convolutional Network（GCN）？ - superbrother的回答 - 知乎<br><a href="https://www.zhihu.com/question/54504471/answer/332657604" target="_blank" rel="noopener">https://www.zhihu.com/question/54504471/answer/332657604</a></p>
+<h2 id="Semi-Supervised"><a href="#Semi-Supervised" class="headerlink" title="Semi-Supervised"></a>Semi-Supervised</h2><p>$\hat{A}=\tilde{D}^{-\frac{1}{2}}\tilde{A}\tilde{D}^{-\frac{1}{2}}$<br>$Z=f(X,A)=softmax(\hat{A}ReLU(\hat{A}XW_0)W_1)​$<br>损失为labeled节点和预测类标的交叉熵</p>
+<p><img src="../img/1554128137628.png" alt="1554128137628"></p>
+<p><img src="../img/1554128161010.png" alt="1554128161010"></p>
+<h2 id="GCN-VAE"><a href="#GCN-VAE" class="headerlink" title="GCN+VAE"></a>GCN+VAE</h2><p>Variational Graph Auto-Encoders<br>tf代码 <a href="https://github.com/tkipf/gae" target="_blank" rel="noopener">https://github.com/tkipf/gae</a><br>VAE <a href="https://zhuanlan.zhihu.com/p/34998569" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34998569</a></p>
+<p>网路构造如下，学习新的邻接矩阵，可用于Link Prediction</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+h &=& ReLU(AXW_1) \\
+\mu &=& AXW_2 \\
+\log\sigma &=& AXW_2 \\
+z &=& \mu+\varepsilon\sigma \\
+\hat{A} &=& preds \\
+&=& \sigma(zz^T)=zz^T \\
+A &=& labels \\
+\end{eqnarray}</script><p>损失函数=重构损失-KL散度<br>重构损失：希望重构的邻接矩阵尽量接近原矩阵<br>KL散度：注意本文式子 -KL 才是散度，代表分布和标准正态分布的相似性，我们希望散度小，即希望-KL小。<br>两种损失互相对抗，一种希望尽量拟合，一种希望模型尽量简单，接近假设分布。</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+&& norm = \frac{n^2}{n^2-\sum_{i,j}^{N,N}{a_{ij}}} \\
+&& L_{re} = norm*mean(softmax(preds,labels)) \\
+&& KL = \frac{1}{n}mean(\frac{1}{2}\sum_{a}^{b}{(1+2\log \sigma-\mu^2-\sigma^2)}) \\
+&& L = L_{re}-KL = E[\log p(A|Z)]-KL[q(Z|X,A)||p(Z)]
+\end{eqnarray}</script>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/04/01/Adaptive-Graph-Convolutional-Neural-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/01/Adaptive-Graph-Convolutional-Neural-Networks/" itemprop="url">Adaptive Graph Convolutional Neural Networks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T20:21:02+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Adaptive Graph Convolutional Neural Networks<br>AAAI 2018<br><a href="https://www.jiqizhixin.com/articles/2018-01-21-8" target="_blank" rel="noopener">https://www.jiqizhixin.com/articles/2018-01-21-8</a></p>
+<p>思想：假设存在最优Laplace，为原Laplace的一个偏移。通过学习Laplace的残差来训练，加速训练过程。</p>
+<p>优点：学习原图隐含的关系（连接新边），可变输入大小（图大小可以不同，点特征维数可以不同）；图分类效果显著</p>
+<p>解释性：graph具有内在结构，如分子上的原子。如何找到有意义的子结构？<br>如苯环结构，至少需要3阶邻域，此时GCN等寻找一阶邻域的不适用。</p>
+<p><img src="../img/1554120040423.png" alt="1554120040423"></p>
+<p>计算两点间<strong>Generalized Mahalanobis distance</strong>，其中M对称半正定，为参数矩阵<br> 计算Gaussian kernel，归一化得到$\hat{A}$</p>
+<p>马氏距离：尺度无关，考虑节点间相关性</p>
+<p><img src="../img/1554119946798.png" alt="1554119946798"></p>
+<p><img src="../img/1554119913175.png" alt="1554119913175"></p>
+<p><img src="../img/1554119923349.png" alt="1554119923349"></p>
+<p>通过学习隐协方差，发掘节点间隐藏关系，作为Laplace的补充。</p>
+<p><img src="../img/1554119896581.png" alt="1554119896581"></p>
+<p>用于图分类：Graph Max Pooling，Graph Gather，Bilateral Filter，Batch Normalization</p>
+<p><img src="../img/1554120401682.png" alt="1554120401682"></p>
+<p>实验：Multi-task Prediction on Molecular Datasets，Point Cloud Object Classification</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/04/01/Representation-Learning-on-Graphs-with-Jumping-Knowledge-Networks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/01/Representation-Learning-on-Graphs-with-Jumping-Knowledge-Networks/" itemprop="url">Representation Learning on Graphs with Jumping Knowledge Networks</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T19:52:54+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Representation Learning on Graphs with Jumping Knowledge Networks<br>ICML 2018<br><a href="https://zhuanlan.zhihu.com/p/40929696" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/40929696</a></p>
+<p>思想：每层输出加权，输入最后一层。<br>    聚合函数：线性变换；取最大值；LSTM训练每层输出，取分数最大。</p>
+<p>优点：解决不同节点对全局和局部信息获取的不平衡问题。<br>缺点：效果一般；理论证明只基于简化的1阶GCN</p>
+<p>问题背景：当前图的表示学习方法，主要是<strong>neighborhood aggregation</strong>，每次迭代都结合当前节点特征和邻域节点特征，输出新的隐层特征。</p>
+<p>GCN缺陷：最佳两层，不能增加。对不同邻域结构的节点，输出表示来自的平滑范围不同。密度中心容易得到全局信息，边缘节点只能得到局部信息。如何找到适当邻域？</p>
+<p>如图：当前节点居于中心，平滑范围扩散过快；当前节点居于边缘，范围扩散过慢；一旦触及中心，平滑扩散速度陡增。</p>
+<p><img src="../img/1554108642898.png" alt="1554108642898"></p>
+<p><img src="../img/1554108684150.png" alt="1554108684150"></p>
+<p>本文亮点：将k层图卷积和k步随机游走联系起来</p>
+<p><img src="../img/1554109531126.png" alt="1554109531126"></p>
+<p>实验：GCN，GraphSAGE，GAT （谱，非谱，注意力非谱）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/04/01/GRAPH-ATTENTION-NETWORKS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Koyomi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gold Experience">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/01/GRAPH-ATTENTION-NETWORKS/" itemprop="url">GRAPH ATTENTION NETWORKS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T19:43:12+08:00">
+                2019-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Graph/" itemprop="url" rel="index">
+                    <span itemprop="name">Graph</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>GRAPH ATTENTION NETWORKS<br>ICLR 2018<br><a href="https://github.com/PetarV-/GAT" target="_blank" rel="noopener">https://github.com/PetarV-/GAT</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/34232818" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34232818</a></p>
+<p>思想：attention对每个样本对当前样本的影响加权；mask相当于取一阶邻域结构，通过这两者结合，提出一种提取隐层特征的结构。本质是权值更新方法的改变。</p>
+<p>优点：允许可变大小邻域；计算简单<br>缺点：比起GCN，效果提升一般</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>—</th>
+<th>—</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td>N个节点，每个节点hi，F维特征，输出F’维特征</td>
+</tr>
+<tr>
+<td>W</td>
+<td>F’×F维，所有节点共享</td>
+</tr>
+<tr>
+<td>a</td>
+<td>attentional mechanism，节点共享，输出1维</td>
+</tr>
+<tr>
+<td>$e_{ij}$</td>
+<td>N×N维，attention coefficients，j点特征对i点的重要性，与结构无关<br>通过只考虑1阶邻域的j点，加入结构信息。mask</td>
+</tr>
+<tr>
+<td>$\alpha_{ij}$</td>
+<td>softmax正则化，a为2F’维，ReLU提供非线性表达能力</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>为了提取高维特征，需要先做线性变换</p>
+<p><img src="../img/1554104781008.png" alt="1554104781008"></p>
+<p><img src="../img/1554104797236.png" alt="1554104797236"></p>
+<p><img src="../img/1554104808487.png" alt="1554104808487"></p>
+<p><img src="../img/1554105652853.png" alt="1554105652853"></p>
+<p>每层输出：</p>
+<p><img src="../img/1554104822802.png" alt="1554104822802"></p>
+<p> multi-head attention：K个独立的注意力机制通过连接或平均输出。<br>    连接：输出每个节点特征为KF’维<br>    平均：softmax或sigmoid激活</p>
+<p><img src="../img/1554104837968.png" alt="1554104837968"></p>
+<p><img src="../img/1554104848289.png" alt="1554104848289"></p>
+<p>实验：Cora Citeseer Pubmed PPI</p>
+<p>Transductive：学习分布，还未分类的新数据加入和原数据一起重新学习；unlabeled data参与训练，参与测试，一开始就已知。一般效果比inductive好。<br>    如：GCN</p>
+<p>Inductive：建立模型，新数据不参与模型构建；unlabeled data参与训练，不参与测试，是新加的。</p>
+<p><img src="../img/1554106577034.png" alt="1554106577034"></p>
+<p><img src="../img/1554106598646.png" alt="1554106598646"></p>
+<p>可视化：Cora。连线粗细代表K个不同的head得到的注意力系数大小。</p>
+<p><img src="../img/1554106385706.png" alt="1554106385706"></p>
+<p>扩展：GAT can be reformulated as a particular instance of <strong>MoNet</strong></p>
+<p>Neural machine translation by jointly learning to align and translate - Bahdanau2015<br><a href="https://blog.csdn.net/u011414416/article/details/51057789" target="_blank" rel="noopener">https://blog.csdn.net/u011414416/article/details/51057789</a><br><a href="https://blog.csdn.net/bvl10101111/article/details/78470716" target="_blank" rel="noopener">https://blog.csdn.net/bvl10101111/article/details/78470716</a><br>背景：NLP，RNN的缺点，编码成等长向量，再解码成句子。那么较长的句子编码后会损失较多信息。<br>目的：将信息集中在和当前词有关的词上<br>方法：给每个当前词加入上下文信息，这个信息由全句整合而得，每个单词赋予的权重为“注意力”，和概率有关。</p>
+<p>Attention is all you need - Vaswani2017<br>Multi-head Attention <a href="https://zhuanlan.zhihu.com/p/27464080" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/27464080</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep-Adaptive-Image-Clustering-DAC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -335,6 +983,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Cluster/" itemprop="url" rel="index">
+                    <span itemprop="name">Cluster</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -364,31 +1034,75 @@
       
         
           
-            <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
-<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
+            <p>[TOC]</p>
+<h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。聚类难题在于预定义距离，用AE进行特征学习。缺点在于无监督学出特征表示固定后再聚类。</p>
+<p>​    聚类：基于距离（k-means），基于密度，基于连接（谱聚类）<br>​    无监督表示学习/重构：AE，GAN。基于生成的方法不能直接得到聚类结果。<br>​    成对二元性：一对样本，要么属于同类，要么属于异类，这是二值的。</p>
+<p>目的：通过样本特征和相似性，希望每个样本得到一个one-hot的label feature。问题在于真实相似性未知。</p>
+<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet自适应地训练参数。特征学习和聚类是一体的。</p>
+<p><img src="../img/1552907410576.png" alt="1552907410576"></p>
 <p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
+<p><img src="../img/1552907434367.png" alt="1552907434367"></p>
 <p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
+<p><img src="../img/1552907469086.png" alt="1552907469086"></p>
 <p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
+<p><img src="/1553344590866.png" alt="1553344590866"></p>
+<p><img src="../img/1552907290263.png" alt="1552907290263"></p>
+<p><img src="../img/1552907261955.png" alt="DAC model"></p>
+<p><img src="../img/1552907335522.png" alt="1552907335522"></p>
 <p>参数更新：固定w，更新阈值函数的参数</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
-<p>算法流程：</p>
-<ol>
+<p><img src="../img/1552907369362.png" alt="1552907369362"></p>
+<p>梳理：<br>训练ConvNet，通过最小化log损失。损失为真实相似性和样本间余弦距离的差别。<br>其中，余弦距离为样本的类标特征间的；<br>其中，类标特征的L2范数为1，非负。最好情况为one-hot；【定理证明材料呢？】<br>其后，基于生成的特征，来选取参与训练的样本。<br>训练过程生成特征不断完善，为了逐步加入样本，lambda越来越大，两个阈值逐步靠近，相等时说明所有样本参与训练。</p>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><ol>
 <li>随机初始化网络参数</li>
 <li>采样batch，m个样本</li>
 <li>根据余弦距离选择置信度高的样本，打上类标</li>
 <li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
 <li>最小化损失函数，更新网络参数</li>
-<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
+<li>固定w，更新划分伪类标的阈值。终止条件为所有样本都参与训练。</li>
 <li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
 </ol>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
+<p><img src="../img/1552907154870.png" alt="Adaptive Learning"></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验细节：阈值的选择，初始化；噪声样本【如果是图，本来就是稀疏词特征，可以加噪吗？】</p>
+<p>评估指标：【衡量两个数据分布吻合程度】</p>
+<ul>
+<li><p>RI 兰德系数： $ RI= \frac{a+b}{a+b+c+d} =  \frac{a+b}{C_n^2} ​$ 范围[0,1]，越大越好；从数据选出的对中，同类分为同类，异类分为异类的概率；c、d为分错的。</p>
+</li>
+<li><p>Adjusted Rand Index (ARI)：$ RI= \frac{RI-E[RI]}{max(RI)-E[RI]} $ 范围[-1,1]，越大越符合真实分布；保证随机结果的指标接近0。</p>
+</li>
+<li>Normalized Mutual Information (NMI)：范围[0,1]；AMI同ARI的思想；</li>
+</ul>
+<p>优势：特征具有一定可解释性</p>
 <p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><ul>
+<li><p>为什么有效？</p>
+</li>
+<li><p>为什么余弦距离？余弦距离优势？可否更换？</p>
+<p>余弦距离能代表样本对的关联度，解释性强；</p>
+<p>图的距离：最短路，测地线，hitting time等等</p>
+</li>
+<li><p>生成类标特征的方法？</p>
+<p>移植GCN</p>
+</li>
+<li><p>训练样本选择？两个阈值设置？</p>
+</li>
+<li><p>labeled的利用？</p>
+<p>$L = L_u+L_l$ 【看看图的半监督GNN和GCN，无监督有GAE】</p>
+<p>GCN的半监督直接不用unlaebled误差损失，而用adj信息平滑。</p>
+</li>
+<li><p>adj的利用？</p>
+<p>$L(ka<em>{ij}+(1-k)r</em>{ij}, l_il_j)$ k&gt;0.5</p>
+<p>最短路径代替余弦</p>
+</li>
+</ul>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>自步学习(Self-paced Learning)</p>
+<p>课程学习(Curriculum Learning)：先学习简单数据（课程）</p>
+<h2 id="Joint-Unsupervised-Learning-of-Deep-Representations-and-Image-Clusters"><a href="#Joint-Unsupervised-Learning-of-Deep-Representations-and-Image-Clusters" class="headerlink" title="Joint Unsupervised Learning of Deep Representations and Image Clusters"></a>Joint Unsupervised Learning of Deep Representations and Image Clusters</h2><p><img src="/1553670275766.png" alt="1553670275766"></p>
+<p>聚类使用agglomerative clustering ：因为始于over-clustering，此时特征表示不够可信。是个循环过程。<br>特征表示学习使用CNN：随机初始化不可信，但最近邻和over-clustering可接受。</p>
+<p>层次聚类：找到相似度最高的两个簇。相似度矩阵由高斯核定义。</p>
+<h2 id="Joint-Image-Clustering-and-Labeling-by-Matrix-Factorization"><a href="#Joint-Image-Clustering-and-Labeling-by-Matrix-Factorization" class="headerlink" title="Joint Image Clustering and Labeling by Matrix Factorization"></a>Joint Image Clustering and Labeling by Matrix Factorization</h2><p>解释：聚类通常不构建人类用类别区分簇这种行为，故将相关类标加入表示。即为label feature。<br>kNN当数据量大时，分类效果好；视觉和语义具有联系。</p>
+<p>流程：<br>输入数据，n个样本，每个样本t维<br>寻找kNN，每个近邻都对应一个label feature，d维（即最后分为d类）<br>计算每个近邻的权重，只和距离有关<br>每个label feature的值来自所有近邻在相应维度的label feature的加权<br>迭代更新后得到最终label feature</p>
+<p><img src="/1553672697139.png" alt="1553672697139"></p>
+<p>问题：如何初始化？终止条件？【】</p>
 
           
         
@@ -437,7 +1151,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Deep Adaptive Image Clustering/">
+    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/18/Algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Koyomi">
@@ -456,7 +1170,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/03/18/Deep Adaptive Image Clustering/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2019/03/18/Algorithm/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -468,7 +1182,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T19:04:36+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T11:36:37+08:00">
                 2019-03-18
               </time>
             
@@ -508,184 +1222,65 @@
       
         
           
-            <h1 id="Deep-Adaptive-Image-Clustering-DAC"><a href="#Deep-Adaptive-Image-Clustering-DAC" class="headerlink" title="Deep Adaptive Image Clustering (DAC)"></a>Deep Adaptive Image Clustering (DAC)</h1><p>背景：结合表示学习和聚类。用二分类问题框架来聚类、</p>
-<p>方法：利用余弦距离衡量样本相似性，用深度卷积网络ConvNet训练参数。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907410576.png" alt="1552907410576"></p>
-<p>损失函数：真实类标是否同类 vs 网络学得余弦距离</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907434367.png" alt="1552907434367"></p>
-<p>余弦距离：网络学得样本的<strong>类标特征(label feature)</strong>，代表分为每一类的可能性，非负。L2归一化。样本类标特征间的点乘即为距离。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907469086.png" alt="1552907469086"></p>
-<p>真实样本：未知。通过学习到的距离确定，设置两个阈值，希望两两异类距离大于两两同类。即选择置信度高的样本，给予伪类标。</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907290263.png" alt="1552907290263"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907261955.png" alt="DAC model"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907335522.png" alt="1552907335522"></p>
-<p>参数更新：固定w，更新阈值函数的参数</p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907369362.png" alt="1552907369362"></p>
-<p>算法流程：</p>
-<ol>
-<li>随机初始化网络参数</li>
-<li>采样batch，m个样本</li>
-<li>根据余弦距离选择置信度高的样本，打上类标</li>
-<li>有类标的样本系数记为1，无类标的样本系数记为0，用于求损失函数</li>
-<li>最小化损失函数，更新网络参数</li>
-<li>固定w，更新划分伪类标的阈值。直到能把两类样本划分开</li>
-<li>上述迭代完成后，类标特征值最大的即为该样本类标。</li>
+            <p><strong>Top Interview Questions</strong> 完成Easy（除了Downvote多的）<br>Hash Table 完成Easy</p>
+<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><p>划分子问题，合并解。常用递归。如二分搜索，快速排序，归并排序，棋盘。</p>
+<p>若子问题最优解不能合并，用贪心或DP；若子问题不独立，用DP</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>下一子问题求解基于上一子问题。阶段最优化，无后效性。</p>
+<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><p>选择当前最好，局部最优解。适用无后效性问题。</p>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>深度优先搜索，向前回溯，判断是否包含解</p>
+<h2 id="分支定界"><a href="#分支定界" class="headerlink" title="分支定界"></a>分支定界</h2><p>广度优先搜索</p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><ol>
+<li>判断循环链表：若快指针到达NULL，说明不是循环；若快指针追上慢指针，说明是循环。<ul>
+<li><ol>
+<li>Linked List Cycle 循环链表</li>
 </ol>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1552907154870.png" alt="Adaptive Learning"></p>
-<p>总结：最终目标是为每个样本学习一个类标特征（即归一化后每个值代表分为该类的概率），方法是学习类标特征之间的距离矩阵。由于没有真实类标，所以要利用学习结果中置信度高的创造伪类标，对这一部分有监督学习，来计算损失函数。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://errol-andy.github.io/2019/03/12/first-page/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Koyomi">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gold Experience">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/12/first-page/" itemprop="url">first page</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T21:42:07+08:00">
-                2019-03-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/" itemprop="url" rel="index">
-                    <span itemprop="name">paper</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/paper/code/" itemprop="url" rel="index">
-                    <span itemprop="name">code</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
+</li>
+<li><ol>
+<li>Find the Duplicate Number 结合下标的利用<br><a href="https://www.jianshu.com/p/885e3c5b7055" target="_blank" rel="noopener">https://www.jianshu.com/p/885e3c5b7055</a></li>
+</ol>
+</li>
+</ul>
+</li>
+<li>寻找中值：若快指针到达NULL，则慢指针所在为中值。<ul>
+<li><ol>
+<li>Palindrome Linked List 链表回文</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Sliding-Window"><a href="#Sliding-Window" class="headerlink" title="Sliding Window"></a>Sliding Window</h2><p>双指针，同步移动</p>
+<ul>
+<li><ol>
+<li>Find All Anagrams in a String 哈希表对比</li>
+</ol>
+</li>
+</ul>
+<h2 id="Tree-递归和迭代"><a href="#Tree-递归和迭代" class="headerlink" title="Tree 递归和迭代"></a>Tree 递归和迭代</h2><h3 id="树的比较"><a href="#树的比较" class="headerlink" title="树的比较"></a>树的比较</h3><ul>
+<li><ol>
+<li>Same Tree 判断相同</li>
+</ol>
+</li>
+<li><ol>
+<li>Subtree of Another Tree 判断子树</li>
+</ol>
+</li>
+</ul>
+<h3 id="树的深度"><a href="#树的深度" class="headerlink" title="树的深度"></a>树的深度</h3><ul>
+<li><ol>
+<li>Maximum Depth of Binary Tree</li>
+</ol>
+</li>
+<li><ol>
+<li>Minimum Depth of Binary Tree</li>
+</ol>
+</li>
+<li><ol>
+<li>Diameter of Binary Tree</li>
+</ol>
+</li>
+</ul>
+<h3 id="树的其他"><a href="#树的其他" class="headerlink" title="树的其他"></a>树的其他</h3>
           
         
       
@@ -764,7 +1359,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T20:34:21+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-12T21:42:07+08:00">
                 2019-03-12
               </time>
             
@@ -774,6 +1369,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -894,7 +1511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -905,7 +1522,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -916,7 +1533,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1136,6 +1753,45 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
 
   
 
